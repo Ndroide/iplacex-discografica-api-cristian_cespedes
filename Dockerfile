@@ -1,5 +1,5 @@
 # ---------- STAGE 1: Build con Gradle ----------
-FROM gradle:8.5-jdk22 AS build
+FROM gradle:8.5-jdk17 AS build
 WORKDIR /home/gradle/project
 
 # Copiamos todo el proyecto dentro de la imagen
@@ -9,7 +9,7 @@ COPY . .
 RUN gradle clean bootJar --no-daemon
 
 # ---------- STAGE 2: Runtime con OpenJDK ----------
-FROM openjdk:22-jdk-slim
+FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copiamos el JAR generado en el stage anterior
